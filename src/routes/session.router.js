@@ -56,4 +56,13 @@ router.post('/register', async (req, res) => {
 
    }) 
 
+
+
+router.get('/logout', (req,res) => {
+    if (req.session.user){
+        req.session.destroy()
+        res.redirect("/login")
+    }
+});
+
 export default router
