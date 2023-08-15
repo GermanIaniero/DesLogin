@@ -21,17 +21,29 @@
             </li>
         </ul>
     </div>
+
+{{#each user}} 
+     <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://toppng.com/public/uploads/preview/user-account-management-logo-user-icon-11562867145a56rus2zwu.png" class="avatar" alt="Avatar"> {{this.first_name}} {{this.last_name}} <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#"><i class="fa fa-user-o"></i>  {{this.first_name}} {{this.last_name}}</a></li>
+					<li><a href="#"><i class="fa fa-calendar-o"></i>  {{this.email}}</a></li>
+					<li><a href="#"><i class="fa fa-sliders"></i> {{this.age}}</a></li>
+					<li class="divider"></li>
+					<li><a href="#"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
+				</ul>
+			</li>
+	</ul>
 </nav>
 
 <br>
 
-{{#each user}} 
-<h1>Bienvenido al sistema</h1>
-<h3>Nombre: {{this.first_name}}</h3>
-<h3>Apellido: {{this.last_name}}</h3>
-<h3>Email: {{this.email}}</h3>
-<h3>Age: {{this.age}}</h3>
  {{/each}}
+
+<h3>Bienvenido al sistema</h3>
+
+
 
 <h1 class="text-center">Lista de productos asincronos</h1>
 

@@ -4,8 +4,7 @@ import MongoStore from 'connect-mongo'
 import handlebars from 'express-handlebars'
 import mongoose from 'mongoose'
 /*socketio
-const ProductManager = require("./dao/remote/managers/product/productManager");
-const productManager = new ProductManager();
+
 
 const ChatManager = require("./dao/remote/managers/chat/chatManager")
 const chatManager = new ChatManager() */
