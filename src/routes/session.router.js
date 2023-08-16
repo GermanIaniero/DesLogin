@@ -58,11 +58,44 @@ router.post('/register', async (req, res) => {
 
 
 
-router.get('/logout', (req,res) => {
+router.delete('/logout', (req,res) => {
     if (req.session.user){
         req.session.destroy()
         res.redirect("/login")
-    }
-});
 
+        req.session.destroy((err)=>{
+            if(!err) return res.redirect("/login");
+            res.send ({status:"logoutError", body: err});
+        });   
+    }
+}); 
+
+
+/*function desLogueo(){
+const logoutButton = document.getElementById('logoutButton');
+    
+if(logoutButton) {
+    logoutButton.addEventListener('click',async () => {
+        try {
+            const response = await fetch('api/session/logout', {
+                method:'DELETE',
+            });
+            
+            if (response.ok){
+                console.log("redirigiendo");
+                window.location.href='/login';
+            } else {
+                console.log('Error al cerrar sesión');
+            }
+
+        
+        }catch (error){
+            console.log('Error al comunicarse con el servidor:', error);
+        }
+       }); 
+    }else{
+        console.log("no existe");
+    } 
+
+}*/
 export default router
