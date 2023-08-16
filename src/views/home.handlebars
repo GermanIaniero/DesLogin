@@ -31,8 +31,8 @@
 					<li><a href="#"><i class="fa fa-calendar-o"></i>  {{this.email}}</a></li>
 					<li><a href="#"><i class="fa fa-sliders"></i> {{this.age}}</a></li>
 					<li class="divider"></li>
-					<li><a href="/logout"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
-                    <button id="logoutButton" onclick="desLogueo()"></button>
+					
+                    <button id="logoutButton" onclick="desLogueo()">Logout</button>
 				</ul>
 			</li>
 	</ul>
@@ -73,4 +73,34 @@
             <a href="{{nextLink}}"><p style="text-align:center">Siguiente </p></a>
         {{/if}}
     </div>
-</div>    
+</div>   
+
+<script>
+const logoutButton = document.getElementById('logoutButton');
+    
+if(logoutButton) {
+    logoutButton.addEventListener('click',async () => {
+        try {
+            const response = await fetch('api/session/logout', {
+                method:'DELETE',
+            });
+            
+            if (response.ok){
+                console.log("redirigiendo");
+                window.location.href='/login';
+            } else {
+                console.log('Error al cerrar sesión');
+            }
+
+        
+        }catch (error){
+            console.log('Error al comunicarse con el servidor:', error);
+        }
+    })
+       
+}else{
+        console.log("no existe");
+} 
+
+
+</script>

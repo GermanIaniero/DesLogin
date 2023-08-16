@@ -70,32 +70,4 @@ router.delete('/logout', (req,res) => {
     }
 }); 
 
-
-/*function desLogueo(){
-const logoutButton = document.getElementById('logoutButton');
-    
-if(logoutButton) {
-    logoutButton.addEventListener('click',async () => {
-        try {
-            const response = await fetch('api/session/logout', {
-                method:'DELETE',
-            });
-            
-            if (response.ok){
-                console.log("redirigiendo");
-                window.location.href='/login';
-            } else {
-                console.log('Error al cerrar sesión');
-            }
-
-        
-        }catch (error){
-            console.log('Error al comunicarse con el servidor:', error);
-        }
-       }); 
-    }else{
-        console.log("no existe");
-    } 
-
-}*/
 export default router
