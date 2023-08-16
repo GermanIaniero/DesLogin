@@ -58,16 +58,15 @@ router.post('/register', async (req, res) => {
 
 
 
-router.delete('/logout', (req,res) => {
-    if (req.session.user){
-        req.session.destroy()
-        res.redirect("/login")
-
-        req.session.destroy((err)=>{
-            if(!err) return res.redirect("/login");
-            res.send ({status:"logoutError", body: err});
-        });   
-    }
-}); 
+router.delete("/logout", (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+          console.error('Error al cerrar sesión:', err);
+        } else {
+          console.log('Sesión cerrada exitosamente');
+          res.send("ok")
+        }
+    });
+})
 
 export default router

@@ -29,4 +29,8 @@ router.get('/profile', auth, (req, res) => {
     res.render('profile', user)
 })
 
+router.get('/login', (req, res) => {
+    res.render('login', {})
+})
+
 export default router
