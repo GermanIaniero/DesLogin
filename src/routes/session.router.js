@@ -13,12 +13,13 @@ router.get('/login', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await UserModel.findOne({ email, password })
-    if(!user) return res.redirect('login')
+    if(!user) return res.redirect('/login')
 
     req.session.user = user
 
     const products = await productModel.find().lean().exec()
     res.render('home', { products, user})
+    console.log(user)
     
     // const docs = await productModel.find({})
     // return res.render('home', docs)
