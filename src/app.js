@@ -15,19 +15,13 @@ import viewsRouter from './routes/views.router.js'
 
 import __dirname from './utils.js'
 
+import passport from 'passport'
+import initializePassport from './config/passport.config.js'
+//import jwtRouter from './routes/jwt.router.js'
+
 const app = express()
 const uri = 'mongodb+srv://gerlian:1234@clusterger.mgws5uk.mongodb.net/'
 const dbName = 'Login'
-
-//app.use("/static", express.static("./src/public"));
-//app.use(express.json());
-
-/*const handlebars = handlebars.create({
-    runtimeOptions: {
-      allowProtoPropertiesByDefault: true,
-      allowProtoMethodsByDefault: true,
-    },
-  });*/
 
 
 // CONFIGURACION HANDLEBARS
@@ -49,12 +43,17 @@ app.use(session({
             useNewUrlParser: true,
             useUnifiedTopology: true
         },
-        ttl: 1000,
+        ttl: 15
     }),
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }))
+
+// Passport
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/api/session', sessionRouter)
 app.get('/health', (req, res) => res.send(`<h1>OK</h1>`))
@@ -69,6 +68,8 @@ mongoose.connect(uri, {dbName})
         console.log('Connected')
         app.listen(8080, () => console.log('Listeing...'))
     })
+    .catch(e => console.error(e))
+    
 /*const io = new Server(httpServer);    
 
 io.on("connection", (socket) => {
