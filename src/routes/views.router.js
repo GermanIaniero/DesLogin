@@ -1,13 +1,20 @@
-import { Router } from "express";
+import { response, Router } from "express";
+import productModel from "../models/productModel.js";
 
 const router = Router()
 
-router.get('/', (req, res) => {
-    if(req.session?.user) {
-        res.redirect('/profile')
+router.get('/', async (req, res) => {
+    const products = await productModel.find().lean().exec()
+    
+    if (req.session?.user) {
+        let user = (req.session.user)
+        res.render('home', { products, user})    
     }
-
-    res.render('login', {})
+    else{
+        res.render('home', { products})    
+    }
+    
+    
 })
 
 router.get('/register', (req, res) => {

@@ -15,7 +15,10 @@ router.get('/login', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await UserModel.findOne({ email, password }).lean().exec()
-   
+    
+    console.log(user)       
+    if(!user) return res.redirect("/login")
+
         if (user.email === "adminCoder@coder.com"){
             const passChek = await UserModel.findOne({ password}).lean().exec();
           
@@ -27,7 +30,7 @@ router.post('/login', async (req, res) => {
         }    
            // return res.render("login");
       
-    if(!user) return alert("No existe el usuario")
+    
 
     req.session.user = user
 
